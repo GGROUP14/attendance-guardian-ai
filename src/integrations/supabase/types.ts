@@ -14,7 +14,171 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      attendance_records: {
+        Row: {
+          class_hour: string
+          date: string
+          id: string
+          marked_at: string
+          marked_by: string | null
+          status: string
+          student_id: string
+        }
+        Insert: {
+          class_hour: string
+          date?: string
+          id?: string
+          marked_at?: string
+          marked_by?: string | null
+          status: string
+          student_id: string
+        }
+        Update: {
+          class_hour?: string
+          date?: string
+          id?: string
+          marked_at?: string
+          marked_by?: string | null
+          status?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_records_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      class_schedules: {
+        Row: {
+          created_at: string
+          end_time: string
+          id: string
+          is_break_time: boolean
+          start_time: string
+        }
+        Insert: {
+          created_at?: string
+          end_time: string
+          id?: string
+          is_break_time?: boolean
+          start_time: string
+        }
+        Update: {
+          created_at?: string
+          end_time?: string
+          id?: string
+          is_break_time?: boolean
+          start_time?: string
+        }
+        Relationships: []
+      }
+      duty_leaves: {
+        Row: {
+          approved_at: string
+          approved_by: string | null
+          class_hour: string
+          date: string
+          id: string
+          reason: string | null
+          student_id: string
+        }
+        Insert: {
+          approved_at?: string
+          approved_by?: string | null
+          class_hour: string
+          date?: string
+          id?: string
+          reason?: string | null
+          student_id: string
+        }
+        Update: {
+          approved_at?: string
+          approved_by?: string | null
+          class_hour?: string
+          date?: string
+          id?: string
+          reason?: string | null
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "duty_leaves_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          class_hour: string
+          date: string
+          detected_at: string
+          id: string
+          is_read: boolean
+          message: string
+          student_id: string
+        }
+        Insert: {
+          class_hour: string
+          date?: string
+          detected_at?: string
+          id?: string
+          is_read?: boolean
+          message: string
+          student_id: string
+        }
+        Update: {
+          class_hour?: string
+          date?: string
+          detected_at?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      students: {
+        Row: {
+          created_at: string
+          face_encoding: Json | null
+          id: string
+          name: string
+          photo_url: string | null
+          student_id: string
+        }
+        Insert: {
+          created_at?: string
+          face_encoding?: Json | null
+          id?: string
+          name: string
+          photo_url?: string | null
+          student_id: string
+        }
+        Update: {
+          created_at?: string
+          face_encoding?: Json | null
+          id?: string
+          name?: string
+          photo_url?: string | null
+          student_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
