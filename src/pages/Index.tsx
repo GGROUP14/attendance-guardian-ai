@@ -77,46 +77,64 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b bg-card">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* Mobile-optimized header */}
+      <header className="sticky top-0 z-50 border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
+        <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center gap-2">
-            <Users className="h-6 w-6 text-primary" />
-            <h1 className="text-2xl font-bold">Attendance Guardian AI</h1>
+            <Users className="h-5 w-5 text-primary" />
+            <h1 className="text-lg font-bold truncate max-w-[180px] sm:max-w-none sm:text-xl">
+              Attendance Guardian
+            </h1>
           </div>
           
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-muted-foreground">
-              Welcome, {user.email}
-            </span>
-            <Button variant="outline" size="sm" onClick={handleLogout}>
-              <LogOut className="h-4 w-4 mr-2" />
-              Logout
-            </Button>
-          </div>
+          <Button variant="ghost" size="sm" onClick={handleLogout} className="p-2">
+            <LogOut className="h-4 w-4" />
+            <span className="sr-only">Logout</span>
+          </Button>
+        </div>
+        
+        {/* User info bar */}
+        <div className="px-4 pb-2">
+          <p className="text-xs text-muted-foreground truncate">
+            {user.email}
+          </p>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="attendance" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="attendance" className="flex items-center gap-2">
-              <ClipboardCheck className="h-4 w-4" />
-              Mark Attendance
-            </TabsTrigger>
-            <TabsTrigger value="monitor" className="flex items-center gap-2">
-              <Camera className="h-4 w-4" />
-              Face Recognition Monitor
-            </TabsTrigger>
-          </TabsList>
+      {/* Main content with mobile-first tabs */}
+      <main className="flex-1 flex flex-col">
+        <Tabs defaultValue="attendance" className="flex-1 flex flex-col">
+          {/* Mobile-optimized tab navigation */}
+          <div className="border-b bg-muted/10">
+            <TabsList className="grid w-full grid-cols-2 bg-transparent h-auto p-0">
+              <TabsTrigger 
+                value="attendance" 
+                className="flex items-center justify-center gap-2 py-4 px-2 text-sm data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-none border-b-2 border-transparent data-[state=active]:border-primary"
+              >
+                <ClipboardCheck className="h-4 w-4" />
+                <span className="hidden xs:inline">Mark</span> Attendance
+              </TabsTrigger>
+              <TabsTrigger 
+                value="monitor" 
+                className="flex items-center justify-center gap-2 py-4 px-2 text-sm data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-none border-b-2 border-transparent data-[state=active]:border-primary"
+              >
+                <Camera className="h-4 w-4" />
+                <span className="hidden xs:inline">Face</span> Monitor
+              </TabsTrigger>
+            </TabsList>
+          </div>
           
-          <TabsContent value="attendance">
-            <AttendanceMarking />
-          </TabsContent>
-          
-          <TabsContent value="monitor">
-            <FaceRecognitionMonitor />
-          </TabsContent>
+          {/* Tab content with mobile padding */}
+          <div className="flex-1 p-4">
+            <TabsContent value="attendance" className="mt-0 h-full">
+              <AttendanceMarking />
+            </TabsContent>
+            
+            <TabsContent value="monitor" className="mt-0 h-full">
+              <FaceRecognitionMonitor />
+            </TabsContent>
+          </div>
         </Tabs>
       </main>
     </div>
