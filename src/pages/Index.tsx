@@ -9,6 +9,7 @@ import { User, Session } from '@supabase/supabase-js';
 import { LogOut, Users, Camera, ClipboardCheck } from 'lucide-react';
 import AttendanceMarking from '@/components/AttendanceMarking';
 import FaceRecognitionMonitor from '@/components/FaceRecognitionMonitor';
+import StudentManager from '@/components/StudentManager';
 
 const Index = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -106,24 +107,29 @@ const Index = () => {
       <main className="flex-1 flex flex-col">
         <Tabs defaultValue="attendance" className="flex-1 flex flex-col">
           {/* Mobile-optimized tab navigation */}
-          <div className="border-b bg-muted/10">
-            <TabsList className="grid w-full grid-cols-2 bg-transparent h-auto p-0">
-              <TabsTrigger 
-                value="attendance" 
-                className="flex items-center justify-center gap-2 py-4 px-2 text-sm data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-none border-b-2 border-transparent data-[state=active]:border-primary"
-              >
-                <ClipboardCheck className="h-4 w-4" />
-                <span className="hidden xs:inline">Mark</span> Attendance
-              </TabsTrigger>
-              <TabsTrigger 
-                value="monitor" 
-                className="flex items-center justify-center gap-2 py-4 px-2 text-sm data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-none border-b-2 border-transparent data-[state=active]:border-primary"
-              >
-                <Camera className="h-4 w-4" />
-                <span className="hidden xs:inline">Face</span> Monitor
-              </TabsTrigger>
-            </TabsList>
-          </div>
+          <TabsList className="grid w-full grid-cols-3 bg-transparent h-auto p-0">
+            <TabsTrigger 
+              value="attendance" 
+              className="flex items-center justify-center gap-2 py-4 px-2 text-sm data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-none border-b-2 border-transparent data-[state=active]:border-primary"
+            >
+              <ClipboardCheck className="h-4 w-4" />
+              <span className="hidden xs:inline">Mark</span> Attendance
+            </TabsTrigger>
+            <TabsTrigger 
+              value="monitor" 
+              className="flex items-center justify-center gap-2 py-4 px-2 text-sm data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-none border-b-2 border-transparent data-[state=active]:border-primary"
+            >
+              <Camera className="h-4 w-4" />
+              <span className="hidden xs:inline">Face</span> Monitor
+            </TabsTrigger>
+            <TabsTrigger 
+              value="students" 
+              className="flex items-center justify-center gap-2 py-4 px-2 text-sm data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-none border-b-2 border-transparent data-[state=active]:border-primary"
+            >
+              <Users className="h-4 w-4" />
+              <span className="hidden xs:inline">Manage</span> Students
+            </TabsTrigger>
+          </TabsList>
           
           {/* Tab content with mobile padding */}
           <div className="flex-1 p-4">
@@ -133,6 +139,10 @@ const Index = () => {
             
             <TabsContent value="monitor" className="mt-0 h-full">
               <FaceRecognitionMonitor />
+            </TabsContent>
+            
+            <TabsContent value="students" className="mt-0 h-full">
+              <StudentManager />
             </TabsContent>
           </div>
         </Tabs>
