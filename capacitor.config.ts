@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.5f518127fd784bb4ba3f9a1f9bb88f3a',
+  appId: 'com.lovable.attendanceguardianai',
   appName: 'attendance-guardian-ai',
   webDir: 'dist',
   server: {
